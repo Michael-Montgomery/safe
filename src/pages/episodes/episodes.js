@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '../../components/header/header';
 import './episodes.css';
 import videos from '../../data/videos';
@@ -8,6 +8,10 @@ export default function Episodes() {
 
 
 const [episodes, setEpisodes] = useState(videos);
+
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
 
 const handleSearch = (event) => {
         const searchTerm = event.target.value.toLowerCase();

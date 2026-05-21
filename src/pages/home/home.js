@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Carousel from '../../components/carousel/carousel';
 import Header from '../../components/header/header';
 import './home.css';
@@ -15,6 +15,10 @@ export default function Home() {
     const navigate = useNavigate();
 
     const [episodes, setEpisodes] = useState(videos.slice(0, 8));
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const handleSearch = (event) => {
         const searchTerm = event.target.value.toLowerCase();
@@ -79,9 +83,9 @@ export default function Home() {
                     </form>
 
                     <ul className='social-list'>
-                        <li><a href='#'><FontAwesomeIcon icon={faYoutube}></FontAwesomeIcon></a></li>
-                        <li><a href='#'><FontAwesomeIcon icon={faTiktok}></FontAwesomeIcon></a></li>
-                        <li><a href='#'><FontAwesomeIcon icon={faInstagram}></FontAwesomeIcon></a></li>
+                        <li><a href='https://www.youtube.com/@SafeSpacewithSheenaRayvon'><FontAwesomeIcon icon={faYoutube}></FontAwesomeIcon></a></li>
+                        <li><a href='https://www.tiktok.com/@sheena.rayvon?lang=en'><FontAwesomeIcon icon={faTiktok}></FontAwesomeIcon></a></li>
+                        <li><a href='https://www.instagram.com/safespacewithsheenarayvon/'><FontAwesomeIcon icon={faInstagram}></FontAwesomeIcon></a></li>
                     </ul>
 
                    
