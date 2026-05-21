@@ -1,0 +1,47 @@
+
+
+.header {
+    height: 70px;
+    background-image: linear-gradient(to bottom right,#8E4A9C, #9C119A);
+    padding-left: 12px;
+}
+
+.header p {
+    color: white;
+    font-size: 1.6em;
+    font-weight: bold;
+    margin: 0;
+    line-height: 70px;
+    
+}
+
+.header p span {
+    /* display: block; */
+    font-family: "Passions Conflict", cursive;
+  font-weight: 400;
+  font-style: normal;
+    font-size: 1.9em;
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+    .header {
+        height: 60px;
+    }
+
+    .header p {
+        font-size: 1.2em;
+        line-height: 60px;
+    }
+    .header p span {
+        font-size: 1.5em;
+    }
+}
