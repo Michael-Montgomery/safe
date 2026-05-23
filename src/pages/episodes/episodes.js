@@ -3,6 +3,7 @@ import Header from '../../components/header/header';
 import './episodes.css';
 import videos from '../../data/videos';
 import Footer from '../../components/footer/footer';
+import axios from 'axios';
 
 export default function Episodes() {
 
@@ -11,6 +12,17 @@ const [episodes, setEpisodes] = useState(videos);
 
 useEffect(() => {
   window.scrollTo(0, 0);
+  const fetchEpisodes = async () => {
+            console.log('api key:', process.env.REACT_APP_YOUTUBE_API_KEY);
+            try {
+                const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?key=${process.env.REACT_APP_YOUTUBE_API_KEY}&channelId=${process.env.REACT_APP_YOUTUBE_CHANNEL_ID}&part=snippet,id&order=date&maxResults=8`);
+                setEpisodes(response.data.items);
+                console.log(response.data.items);
+            } catch (error) {
+                console.error('Error fetching episodes:', error);
+            }
+        };
+        fetchEpisodes();
 }, []);
 
 const handleSearch = (event) => {

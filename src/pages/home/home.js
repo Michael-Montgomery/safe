@@ -9,6 +9,7 @@ import { faInstagram, faTiktok, faYoutube } from '@fortawesome/free-brands-svg-i
 import headshot from '../../assets/headshot/headshot.jpg';
 import Footer from '../../components/footer/footer';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Home() {
 
@@ -18,12 +19,23 @@ export default function Home() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        const fetchEpisodes = async () => {
+            console.log('api key:', process.env.REACT_APP_YOUTUBE_API_KEY);
+            try {
+                const response = await axios.get(`https://www.googleapis.com/youtube/v3/search?key=${process.env.REACT_APP_YOUTUBE_API_KEY}&channelId=${process.env.REACT_APP_YOUTUBE_CHANNEL_ID}&part=snippet,id&order=date&maxResults=8`);
+                setEpisodes(response.data.items);
+                console.log(response.data.items);
+            } catch (error) {
+                console.error('Error fetching episodes:', error);
+            }
+        };
+        fetchEpisodes();
     }, []);
 
     const handleSearch = (event) => {
         const searchTerm = event.target.value.toLowerCase();
         const filteredEpisodes = videos.filter((episode) =>
-            episode.title.toLowerCase().includes(searchTerm)
+            episode.snippet.title.toLowerCase().includes(searchTerm)
         );
         setEpisodes(filteredEpisodes);
     };
@@ -60,11 +72,12 @@ export default function Home() {
                     <ul>
                         {episodes.map((episode) => (
                             <li key={episode.id}>
-                                <div className='episode-wrapper'>
-                                    <div className='episode-image'>
-                                        <img src={episode.thumbnail} alt={episode.title} />
+                                <div className='episode-wrapper' 
+                                onClick={() => window.location.href=`https://www.youtube.com/watch?v=${episode.id.videoId}`}>
+                                    <div className='episode-image' style={{backgroundImage: `url(${episode.snippet.thumbnails.high.url})`}}>
+                                        {/* <img src={episode.snippet.thumbnails.high.url} alt={episode.snippet.title} /> */}
                                     </div>
-                                   <h2>{episode.title}</h2> 
+                                   <h2>{episode.snippet.title}</h2> 
                                 </div>
                                 
                                 {/* <p>{episode.description}</p> */}

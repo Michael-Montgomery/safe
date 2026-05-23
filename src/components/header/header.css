@@ -4,6 +4,11 @@
     height: 70px;
     background-image: linear-gradient(to bottom right,#8E4A9C, #9C119A);
     padding-left: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    -webkit-box-shadow: 5px 8px 21px -3px #000000; 
+box-shadow: 5px 8px 21px -3px #000000;
 }
 
 .header p {
