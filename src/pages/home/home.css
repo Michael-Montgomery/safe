@@ -148,6 +148,7 @@
     border-radius: 10px;
     margin-bottom: 10px;
     background-size: cover;
+    filter: scale(1.05);
     background-repeat: no-repeat;
 }
 
